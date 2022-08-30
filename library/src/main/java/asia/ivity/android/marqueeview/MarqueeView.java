@@ -8,6 +8,7 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -29,8 +30,6 @@ public class MarqueeView extends LinearLayout {
 
     private ScrollView mScrollView;
 
-    private static final int TEXTVIEW_VIRTUAL_WIDTH = 2000;
-
     private Animation mMoveTextOut = null;
     private Animation mMoveTextIn = null;
 
@@ -41,6 +40,9 @@ public class MarqueeView extends LinearLayout {
     private static final String TAG = MarqueeView.class.getSimpleName();
 
     private float mTextDifference;
+
+    //Change from virtual width to use device width
+    private int deviceActualWidth;
 
     /**
      * Control the speed. The lower this value, the faster it will scroll.
@@ -141,6 +143,9 @@ public class MarqueeView extends LinearLayout {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
 
         mInterpolator = new LinearInterpolator();
+
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        deviceActualWidth = displayMetrics.widthPixels;
     }
 
     @Override
@@ -269,7 +274,6 @@ public class MarqueeView extends LinearLayout {
                     reset();
                     return;
                 }
-                startTextFieldAnimation();
             }
 
             public void onAnimationRepeat(Animation animation) {
@@ -287,7 +291,7 @@ public class MarqueeView extends LinearLayout {
         mTextField = (TextView) getChildAt(0);
         removeView(mTextField);
 
-        mScrollView.addView(mTextField, new ScrollView.LayoutParams(TEXTVIEW_VIRTUAL_WIDTH, LayoutParams.WRAP_CONTENT));
+        mScrollView.addView(mTextField, new ScrollView.LayoutParams(deviceActualWidth, LayoutParams.WRAP_CONTENT));
 
         mTextField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -325,7 +329,7 @@ public class MarqueeView extends LinearLayout {
 
     private void expandTextView() {
         ViewGroup.LayoutParams lp = mTextField.getLayoutParams();
-        lp.width = TEXTVIEW_VIRTUAL_WIDTH;
+        lp.width = deviceActualWidth;
         mTextField.setLayoutParams(lp);
     }
 
