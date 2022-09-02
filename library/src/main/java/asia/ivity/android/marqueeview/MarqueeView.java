@@ -41,8 +41,7 @@ public class MarqueeView extends LinearLayout {
 
     private float mTextDifference;
 
-    //Change from virtual width to use device width
-    private int deviceActualWidth;
+    private int textViewVirtualWidth;
 
     /**
      * Control the speed. The lower this value, the faster it will scroll.
@@ -145,7 +144,7 @@ public class MarqueeView extends LinearLayout {
         mInterpolator = new LinearInterpolator();
 
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        deviceActualWidth = displayMetrics.widthPixels;
+        textViewVirtualWidth = displayMetrics.widthPixels * 2;
     }
 
     @Override
@@ -291,7 +290,7 @@ public class MarqueeView extends LinearLayout {
         mTextField = (TextView) getChildAt(0);
         removeView(mTextField);
 
-        mScrollView.addView(mTextField, new ScrollView.LayoutParams(deviceActualWidth, LayoutParams.WRAP_CONTENT));
+        mScrollView.addView(mTextField, new ScrollView.LayoutParams(textViewVirtualWidth, LayoutParams.WRAP_CONTENT));
 
         mTextField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -329,7 +328,7 @@ public class MarqueeView extends LinearLayout {
 
     private void expandTextView() {
         ViewGroup.LayoutParams lp = mTextField.getLayoutParams();
-        lp.width = deviceActualWidth;
+        lp.width = textViewVirtualWidth;
         mTextField.setLayoutParams(lp);
     }
 

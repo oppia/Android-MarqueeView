@@ -10,8 +10,6 @@ buildscript {
     }
 }
 
-//apply plugin: 'release'
-
 allprojects {
     repositories {
         google()
