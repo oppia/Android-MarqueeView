@@ -270,7 +270,6 @@ public class MarqueeView extends LinearLayout {
                     reset();
                     return;
                 }
-                startTextFieldAnimation();
             }
 
             public void onAnimationRepeat(Animation animation) {
