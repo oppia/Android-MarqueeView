@@ -8,7 +8,6 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -142,9 +141,6 @@ public class MarqueeView extends LinearLayout {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
 
         mInterpolator = new LinearInterpolator();
-
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        textViewVirtualWidth = displayMetrics.widthPixels * 2;
     }
 
     @Override
@@ -217,6 +213,7 @@ public class MarqueeView extends LinearLayout {
         mPaint.setTextSize(mTextField.getTextSize());
         mPaint.setTypeface(mTextField.getTypeface());
         float mTextWidth = mPaint.measureText(mTextField.getText().toString());
+        textViewVirtualWidth = (int) mTextWidth;
 
         // See how much functions are needed at all
         mMarqueeNeeded = mTextWidth > getMeasuredWidth();
@@ -273,6 +270,7 @@ public class MarqueeView extends LinearLayout {
                     reset();
                     return;
                 }
+                startTextFieldAnimation();
             }
 
             public void onAnimationRepeat(Animation animation) {
