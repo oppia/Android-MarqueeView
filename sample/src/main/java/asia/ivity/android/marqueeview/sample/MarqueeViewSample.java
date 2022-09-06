@@ -11,10 +11,11 @@ import asia.ivity.android.marqueeview.MarqueeView;
 
 public class MarqueeViewSample extends Activity {
     final static String[] randomStrings = new String[]{
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed.", "do eiusmod tempor incididunt",
-            "fugiat nulla pariatur. Excepteur sint occaecat cupidatat", "sunt in culpa qui officia", "nisi ut aliquid",
-            "aliquid ex ea commodi consequatur", "inventore veritatis et quasi architecto",
-            "beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem"
+            "Learn anything you want in an effective and enjoyable way.", "Share the experience and create up to 10 profiles.",
+            "Continue learning your lessons without internet connection.",
+            "User is able to download and delete content without Administrator PIN.",
+            "Share the experience and create up to 10 profiles.",
+            "All progress will be deleted and cannot be recovered."
     };
 
     /**
