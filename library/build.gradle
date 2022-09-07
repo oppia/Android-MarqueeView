@@ -5,13 +5,10 @@ apply plugin: 'signing'
 archivesBaseName = 'marqueeview'
 group = 'asia.ivity.android'
 
-dependencies {
-/*    compile 'com.google.android.gms:play-services:3.1.36+'*/
-}
 
 android {
-	compileSdkVersion 19
-	buildToolsVersion "21.1.2"
+	compileSdkVersion 30
+	buildToolsVersion "29.0.2"
 }
 
 // TODO: Add a task that prints the test results.
