@@ -1,15 +1,66 @@
 apply plugin: 'com.android.library'
-// for Android libraries
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
 
 archivesBaseName = 'marqueeview'
 group = 'asia.ivity.android'
 
 
+def  version = '1.0'
+
 android {
 	compileSdkVersion 30
 	buildToolsVersion "29.0.2"
+	defaultConfig {
+		minSdkVersion 19
+		targetSdkVersion 30
+		versionCode 1
+		versionName(version)
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+		}
+
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+	}
 }
 
-// TODO: Add a task that prints the test results.
-task instrumentTest(dependsOn: connectedCheck)
+publishing {
+	publications {
+		mavenJAR(MavenPublication) {
+			afterEvaluate {
+				artifact libraryJar
+			}
+
+			pom {
+				packaging = 'jar'
+
+				name = 'MarqueeView'
+				description = 'Extensive library for customized marquee effect.'
+				url = 'https://github.com/ened/Android-MarqueeView'
+
+				licenses {
+					license {
+						name = 'BSD License'
+						url = 'http://opensource.org/licenses/bsd-license.php'
+						distribution = 'repo'
+					}
+				}
+			}
+		}
+	}
+}
+
+task libraryJar(type: Jar, dependsOn: ['compileReleaseKotlin']) {
+	from {
+		compileReleaseKotlin.destinationDir
+	}
+	android.sourceSets.all { sourceSet ->
+		from(sourceSet.assets.srcDirs) {
+			into "assets/"
+		}
+	}
+
+	archiveName "marqueeview-${version}.jar"
+}
