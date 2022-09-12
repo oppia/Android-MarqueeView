@@ -8,7 +8,6 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -219,13 +218,6 @@ public class MarqueeView extends LinearLayout {
         mMarqueeNeeded = mTextWidth > getMeasuredWidth();
 
         mTextDifference = Math.abs((mTextWidth - getMeasuredWidth())) + 5;
-
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "mTextWidth       : " + mTextWidth);
-            Log.d(TAG, "measuredWidth    : " + getMeasuredWidth());
-            Log.d(TAG, "mMarqueeNeeded   : " + mMarqueeNeeded);
-            Log.d(TAG, "mTextDifference  : " + mTextDifference);
-        }
 
         final int duration = (int) (mTextDifference * mSpeed);
 
