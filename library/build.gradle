@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven-publish'
 
 archivesBaseName = 'marqueeview'
@@ -38,7 +40,7 @@ publishing {
 
 				name = 'MarqueeView'
 				description = 'Extensive library for customized marquee effect.'
-				url = 'https://github.com/ened/Android-MarqueeView'
+				url = 'https://github.com/oppia/Android-MarqueeView'
 
 				licenses {
 					license {
@@ -52,15 +54,15 @@ publishing {
 	}
 }
 
+dependencies {
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+
 task libraryJar(type: Jar, dependsOn: ['compileReleaseKotlin']) {
 	from {
 		compileReleaseKotlin.destinationDir
 	}
-	android.sourceSets.all { sourceSet ->
-		from(sourceSet.assets.srcDirs) {
-			into "assets/"
-		}
-	}
-
 	archiveName "marqueeview-${version}.jar"
 }
