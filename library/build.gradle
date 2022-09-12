@@ -52,11 +52,6 @@ publishing {
 	}
 }
 
-dependencies {
-	implementation fileTree(dir: 'libs', include: ['*.jar'])
-}
-
-
 task libraryJar(type: Jar, dependsOn: ['compileReleaseJavaWithJavac']) {
 	from {
 		compileReleaseJavaWithJavac.destinationDir
