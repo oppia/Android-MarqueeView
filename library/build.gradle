@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven-publish'
 
 archivesBaseName = 'marqueeview'
@@ -56,13 +54,12 @@ publishing {
 
 dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
-	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 
-task libraryJar(type: Jar, dependsOn: ['compileReleaseKotlin']) {
+task libraryJar(type: Jar, dependsOn: ['compileReleaseJavaWithJavac']) {
 	from {
-		compileReleaseKotlin.destinationDir
+		compileReleaseJavaWithJavac.destinationDir
 	}
 	archiveName "marqueeview-${version}.jar"
 }
