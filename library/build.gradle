@@ -4,7 +4,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 archivesBaseName = 'marqueeview'
 group = 'asia.ivity.android'
 
-def  version = '1.0'
+def version = '1.0'
 
 android {
 	compileSdkVersion 30

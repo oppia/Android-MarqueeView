@@ -13,9 +13,7 @@ http_archive(
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
 maven_install(
-    artifacts = [
-    "androidx.appcompat:appcompat:1.0.2",
-    ],
+    artifacts = ["androidx.appcompat:appcompat:1.0.2",],
     repositories = [
         "https://maven.google.com",
     ],
