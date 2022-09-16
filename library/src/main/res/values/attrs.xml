@@ -2,8 +2,8 @@
 <resources>
 
     <declare-styleable name="asia.ivity.android.marqueeview.MarqueeView">
-        <attr name="speed" format="integer"/>
-        <attr name="pause" format="integer"/>
+        <attr name="animationSpeed" format="integer"/>
+        <attr name="animationDelay" format="integer"/>
         <attr name="autoStart" format="boolean"/>
     </declare-styleable>
 
