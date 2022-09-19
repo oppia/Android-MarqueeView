@@ -1,75 +1,26 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
-apply plugin: 'signing'
+apply plugin: 'com.github.dcendents.android-maven'
 
 archivesBaseName = 'marqueeview'
 group = 'asia.ivity.android'
 
+def version = '1.0'
 
 android {
 	compileSdkVersion 30
 	buildToolsVersion "29.0.2"
-}
+	defaultConfig {
+		minSdkVersion 19
+		targetSdkVersion 30
+		versionCode 1
+		versionName(version)
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+		}
 
-// TODO: Add a task that prints the test results.
-task instrumentTest(dependsOn: connectedCheck)
-
-signing {
-    sign configurations.archives
-}
-
-if(hasProperty("sonatypeUsername") && hasProperty("sonatypePassword")) {
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-                repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2') {
-                    authentication(userName: sonatypeUsername, password: sonatypePassword)
-                }
-                snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots/') {
-                    authentication(userName: sonatypeUsername, password: sonatypePassword)
-                }
-
-                modifyPom(addFilter('aar') { artifact, file ->
-                    artifact.name == 'marqueeview'
-                })
-            }
-        }
-    }
-}
-
-def modifyPom(pom) {
-    pom.project {
-        name 'MarqueeView'
-        description 'Extensive library for customized marquee effect.'
-        url 'https://github.com/ened/Android-MarqueeView'
-
-        scm {
-            url 'https://github.com/ened/Android-MarqueeView.git'
-            connection 'git@github.com:ened/Android-MarqueeView.git'
-            developerConnection 'git@github.com:ened/Android-MarqueeView.git'
-        }
-
-        licenses {
-            license {
-                name 'BSD License'
-                url 'http://opensource.org/licenses/bsd-license.php'
-                distribution 'repo'
-            }
-        }
-
-        organization {
-            name 'Ivity Asia'
-            url 'http://www.ivity.asia'
-        }
-
-        developers {
-            developer {
-                id 'ened'
-                name 'Sebastian Roth'
-                url 'http://www.sebroth.com'
-            }
-        }
-    }
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+	}
 }

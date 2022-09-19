@@ -8,7 +8,6 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -45,16 +44,16 @@ public class MarqueeView extends LinearLayout {
     /**
      * Control the speed. The lower this value, the faster it will scroll.
      */
-    private static final int DEFAULT_SPEED = 60;
+    private static final int DEFAULT_ANIMATION_SPEED = 60;
 
     /**
      * Control the pause between the animations. Also, after starting this activity.
      */
-    private static final int DEFAULT_ANIMATION_PAUSE = 2000;
+    private static final int DEFAULT_ANIMATION_DELAY = 2000;
 
-    private int mSpeed = DEFAULT_SPEED;
+    private int mSpeed = DEFAULT_ANIMATION_SPEED;
 
-    private int mAnimationPause = DEFAULT_ANIMATION_PAUSE;
+    private int mAnimationDelay = DEFAULT_ANIMATION_DELAY;
 
     private boolean mAutoStart = false;
 
@@ -81,7 +80,7 @@ public class MarqueeView extends LinearLayout {
      * @param pause In milliseconds.
      */
     public void setPauseBetweenAnimations(int pause) {
-        this.mAnimationPause = pause;
+        this.mAnimationDelay = pause;
     }
 
     /**
@@ -126,8 +125,8 @@ public class MarqueeView extends LinearLayout {
             return;
         }
 
-        mSpeed = a.getInteger(R.styleable.asia_ivity_android_marqueeview_MarqueeView_speed, DEFAULT_SPEED);
-        mAnimationPause = a.getInteger(R.styleable.asia_ivity_android_marqueeview_MarqueeView_pause, DEFAULT_ANIMATION_PAUSE);
+        mSpeed = a.getInteger(R.styleable.asia_ivity_android_marqueeview_MarqueeView_animationSpeed, DEFAULT_ANIMATION_SPEED);
+        mAnimationDelay = a.getInteger(R.styleable.asia_ivity_android_marqueeview_MarqueeView_animationDelay, DEFAULT_ANIMATION_DELAY);
         mAutoStart = a.getBoolean(R.styleable.asia_ivity_android_marqueeview_MarqueeView_autoStart, false);
 
         a.recycle();
@@ -184,7 +183,7 @@ public class MarqueeView extends LinearLayout {
                 mTextField.startAnimation(mMoveTextOut);
             }
         };
-        postDelayed(mAnimationStartRunnable, mAnimationPause);
+        postDelayed(mAnimationStartRunnable, mAnimationDelay);
     }
 
     /**
@@ -220,13 +219,6 @@ public class MarqueeView extends LinearLayout {
 
         mTextDifference = Math.abs((mTextWidth - getMeasuredWidth())) + 5;
 
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "mTextWidth       : " + mTextWidth);
-            Log.d(TAG, "measuredWidth    : " + getMeasuredWidth());
-            Log.d(TAG, "mMarqueeNeeded   : " + mMarqueeNeeded);
-            Log.d(TAG, "mTextDifference  : " + mTextDifference);
-        }
-
         final int duration = (int) (mTextDifference * mSpeed);
 
         mMoveTextOut = new TranslateAnimation(0, -mTextDifference, 0, 0);
@@ -236,7 +228,7 @@ public class MarqueeView extends LinearLayout {
 
         mMoveTextIn = new TranslateAnimation(-mTextDifference, 0, 0, 0);
         mMoveTextIn.setDuration(duration);
-        mMoveTextIn.setStartOffset(mAnimationPause);
+        mMoveTextIn.setStartOffset(mAnimationDelay);
         mMoveTextIn.setInterpolator(mInterpolator);
         mMoveTextIn.setFillAfter(true);
 
