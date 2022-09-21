@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:marquee="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <TextView
         android:text="First MarqueeView"
@@ -45,9 +45,9 @@
         android:id="@+id/marqueeView150"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        marquee:animationSpeed="5"
-        marquee:animationDelay="1000"
-        marquee:autoStart="true"
+        app:animationSpeed="5"
+        app:animationDelay="1000"
+        app:autoStart="true"
         >
 
         <TextView
@@ -84,9 +84,9 @@
         android:id="@+id/marqueeView3"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        marquee:animationSpeed="10"
-        marquee:animationDelay="700"
-        marquee:autoStart="false"
+        app:animationSpeed="10"
+        app:animationDelay="700"
+        app:autoStart="false"
         >
 
         <TextView

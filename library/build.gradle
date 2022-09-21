@@ -10,7 +10,6 @@ android {
 	compileSdkVersion 30
 	buildToolsVersion "29.0.2"
 	defaultConfig {
-		minSdkVersion 19
 		targetSdkVersion 30
 		versionCode 1
 		versionName(version)
